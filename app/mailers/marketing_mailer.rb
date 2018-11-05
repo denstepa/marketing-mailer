@@ -1,0 +1,2 @@
+class MarketingMailer < ApplicationMailer
+end
