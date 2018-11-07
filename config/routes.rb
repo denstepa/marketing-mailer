@@ -1,3 +1,11 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  namespace :admin do
+    resources :campaigns
+
+    # mount Sidekiq::Web => '/sidekiq'
+
+    root to: 'campaigns#index'
+  end
+
 end
