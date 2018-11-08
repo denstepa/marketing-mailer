@@ -14,10 +14,15 @@ class CampaignDashboard < Administrate::BaseDashboard
       remove: false,
       remote_url: false
     ),
+    test_contacts_file: Field::Carrierwave.with_options(
+      remove: false,
+      remote_url: false
+    ),
     contacts_count: Field::Number,
     subject: Field::String,
     template: Field::String,
     internal_name: Field::String,
+    enabled: Field::Boolean,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -30,7 +35,7 @@ class CampaignDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :id,
     :send_at,
-    :contacts_file,
+    :internal_name,
     :contacts_count,
   ].freeze
 
@@ -40,12 +45,12 @@ class CampaignDashboard < Administrate::BaseDashboard
     :id,
     :send_at,
     :contacts_file,
+    :test_contacts_file,
     :contacts_count,
     :subject,
     :template,
     :internal_name,
-    :created_at,
-    :updated_at,
+    :enabled
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -54,10 +59,12 @@ class CampaignDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = [
     :send_at,
     :contacts_file,
+    :test_contacts_file,
     :contacts_count,
     :subject,
     :template,
     :internal_name,
+    :enabled,
   ].freeze
 
   # Overwrite this method to customize how campaigns are displayed
