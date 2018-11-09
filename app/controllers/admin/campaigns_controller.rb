@@ -19,7 +19,8 @@ module Admin
     # for more information
 
     def send_test
-
+      campaign = Campaign.find(params[:id])
+      campaign.send_test
     end
 
     def schedule
