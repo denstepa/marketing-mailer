@@ -12,7 +12,7 @@ class CampaignDashboard < Administrate::BaseDashboard
     send_at: Field::DateTime,
     contacts_file: Field::Carrierwave.with_options(
       remove: false,
-      remote_url: false
+      remote_url: false,
     ),
     test_contacts_file: Field::Carrierwave.with_options(
       remove: false,
