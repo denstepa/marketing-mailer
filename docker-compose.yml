@@ -1,0 +1,35 @@
+version: '3'
+services:
+  db:
+    image: postgres:10
+    restart: always
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+  redis:
+    image: redis:4
+    restart: always
+    volumes:
+      - redis_data:/var/lib/redis
+
+  web:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    command: bash ./docker-entrypount.sh
+    volumes:
+      - .:/app
+    ports:
+      - "3012:3012"
+    depends_on:
+      - db
+    links:
+      - db:db
+      - redis:redis
+    environment:
+      DB_HOST: db
+      DB_USERNAME: postgres
+      DB_PASSWORD:
+
+volumes:
+  pg_data:
+  redis_data:
