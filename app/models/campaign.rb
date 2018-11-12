@@ -6,7 +6,7 @@ class Campaign < ApplicationRecord
 
   include SendGrid
 
-  validates_presence_of :contacts_file
+  # validates_presence_of :contacts_file
 
   mount_uploader :contacts_file, DefaultUploader
   mount_uploader :test_contacts_file, DefaultUploader
@@ -15,13 +15,13 @@ class Campaign < ApplicationRecord
 
   def contacts
     @contacts ||= begin
-      ::CSV.read(contacts_file.path, headers: true)
+      ::CSV.read(contacts_file.path, headers: true) if contacts_file.present?
     end
   end
 
   def test_contacts
     @test_contacts ||= begin
-      ::CSV.read(test_contacts_file.path, headers: true)
+      ::CSV.read(test_contacts_file.path, headers: true) if test_contacts_file.present?
     end
   end
 
@@ -50,7 +50,7 @@ class Campaign < ApplicationRecord
   end
 
   def count_contacts
-    self.contacts_count = contacts.count
+    self.contacts_count = contacts&.count
   end
 
   def send_test
@@ -59,7 +59,7 @@ class Campaign < ApplicationRecord
     end
   end
 
-  def can_send?(is_test)
+  def can_send?(is_test = false)
     is_test || enabled?
   end
 
