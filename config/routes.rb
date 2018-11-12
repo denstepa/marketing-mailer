@@ -4,7 +4,6 @@ Sidekiq::Web.set :session_secret, Rails.configuration.secret_token
 
 Rails.application.routes.draw do
 
-
   namespace :admin do
     resources :campaigns do
       member do
@@ -15,7 +14,8 @@ Rails.application.routes.draw do
 
     mount Sidekiq::Web => '/sidekiq'
 
-    root to: 'campaigns#index'
   end
+
+  root to: 'admin/campaigns#index'
 
 end
