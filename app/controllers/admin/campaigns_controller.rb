@@ -24,7 +24,8 @@ module Admin
     end
 
     def schedule
-
+      campaign = Campaign.find(params[:id])
+      campaign.schedule
     end
 
   end

@@ -33,13 +33,14 @@ class Campaign < ApplicationRecord
 
   def generate_mail(contact_data)
     mail = SendGrid::Mail.new
-    mail.from = Email.new(email: 'denis@inkitt.com')
+    mail.from = Email.new(email: from)
     mail.template_id = template
 
     personalization = Personalization.new
     personalization.add_to(Email.new(contact_data.slice(:email, :name)))
     personalization.subject = subject
     personalization.add_dynamic_template_data(contact_data)
+    personalization.add_dynamic_template_data(subject: subject)
     mail.add_personalization(personalization)
     mail
   end

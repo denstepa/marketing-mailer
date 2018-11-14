@@ -27,6 +27,18 @@ services:
       - sendgrid.env
     ports:
       - "3012:3012"
+  sidekiq:
+    build: .
+    command: bundle exec sidekiq
+    volumes:
+      - .:/app
+    environment:
+      DB_HOST: db
+      DB_USERNAME: postgres
+      DB_PASSWORD:
+    # network_mode: host
+    env_file:
+      - sendgrid.env
 
 volumes:
   pg_data:

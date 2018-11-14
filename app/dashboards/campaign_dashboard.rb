@@ -20,6 +20,7 @@ class CampaignDashboard < Administrate::BaseDashboard
     ),
     contacts_count: Field::Number,
     subject: Field::String,
+    from: Field::String,
     template: Field::String,
     internal_name: Field::String,
     enabled: Field::Boolean,
@@ -48,6 +49,7 @@ class CampaignDashboard < Administrate::BaseDashboard
     :test_contacts_file,
     :contacts_count,
     :subject,
+    :from,
     :template,
     :internal_name,
     :enabled
@@ -62,6 +64,7 @@ class CampaignDashboard < Administrate::BaseDashboard
     :test_contacts_file,
     :contacts_count,
     :subject,
+    :from,
     :template,
     :internal_name,
     :enabled,
