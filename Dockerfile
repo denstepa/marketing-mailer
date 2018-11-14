@@ -1,7 +1,5 @@
 FROM ruby:2.5.3
 
-MAINTAINER Denis Stepanov <denstepa@gmail.com>
-
 RUN apt-get update -qq && apt-get install -y build-essential libpq-dev vim git postgresql-client nodejs yarn
 
 ENV APP_HOME /app
